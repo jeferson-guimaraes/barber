@@ -1,10 +1,11 @@
 import { Router, Request, Response } from 'express';
+
+import { isAuthenticated } from './middlewares/isAuthenticated';
+
 import { CreateUserController } from './controllers/user/CreateUserController';
 import { AuthUserController } from './controllers/user/AuthUserController';
 import { DetailUserController } from './controllers/user/DetailUserController';
 import { UpdateUserController } from './controllers/user/UpdateUserController';
-
-import { isAuthenticated } from './middlewares/isAuthenticated';
 
 import { CreateHaircutController } from './controllers/haircut/CreateHaircutController';
 import { ListHaircutController } from './controllers/haircut/ListHaircutController';
@@ -12,7 +13,9 @@ import { UpdateHaircutController } from './controllers/haircut/UpdateHaircutCont
 import { CheckSubscriptionController } from './controllers/haircut/CheckSubscriptionController';
 import { CountHaircutsController } from './controllers/haircut/CountHaircutsController';
 import { DetailHaircutController } from './controllers/haircut/DetailHaircutController';
+
 import { NewScheduleController } from './controllers/schedule/NewScheduleController';
+import { ListScheduleController } from './controllers/schedule/ListScheduleController';
 
 const router = Router();
 
@@ -36,5 +39,6 @@ router.get('/haircut/detail', isAuthenticated, new DetailHaircutController().han
 
 // --- ROTAS SCHEDULE ---
 router.post('/schedule', isAuthenticated, new NewScheduleController().handle);
+router.get('/schedule', isAuthenticated, new ListScheduleController().handle);
 
 export { router };
